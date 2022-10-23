@@ -55,9 +55,9 @@ window.onload = init;
 function init(){
     var elem = document.getElementById("q");
     elem.addEventListener("keydown", function (e) {
-        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+        if (e.key === "Enter") {  //checks whether the pressed key is "Enter"
             PlayerChoose();
-            
+            document.getElementById("q").disabled = true;
         }
     });
 }
@@ -84,6 +84,7 @@ function autocompleteMatch(input) {
   
   function showResults(val) {
     res = document.getElementById("result");
+    
     res.innerHTML = '';
     let list = '';
     let terms = autocompleteMatch(val);
@@ -116,6 +117,7 @@ function GetResult(){
   .then((data) => {
     console.log(data);
     document.getElementById("msg").innerHTML= data.winner +" "+data.outcome+" "+data.loser+", \n"+"Winner: "+data.winner;
+    document.getElementById("q").disabled = false;
     if(data.winner == playerchoice){
         ppoints++;
         document.getElementById("ps").innerHTML = "Score: "+ppoints;
